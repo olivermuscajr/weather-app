@@ -7,7 +7,11 @@
 .bg-sunset {
   background: linear-gradient(to bottom right, #1c2f49, #0d151f);
 }
-
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .app {
   width: 100vw;
   min-height: 100vh;

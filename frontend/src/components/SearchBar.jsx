@@ -14,8 +14,8 @@ const SearchBar = ({ onSearch }) => {
     return (
         <form onSubmit={handleSubmit}>
             <span className="search-icon"></span>
-            <input className="search-input" type="text" placeholder="Sydney" value={city} onChange={(e) => setCity(e.target.value)} required
-            />
+            <input className="search-input" type="text" placeholder="Search location..." value={city} onChange={(e) => setCity(e.target.value)} />
+            <button type="submit">🔍</button>
         </form>
     )
 }

@@ -1,0 +1,40 @@
+.day-container {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.05);
+  gap: 0.5rem;
+}
+
+.day-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgb(73, 73, 73);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.day-condition {
+  display: flex;
+  align-items: center;
+}
+
+.day-text {
+  flex: 2;
+}
+
+@media (max-width: 768px) {
+  .day-container {
+    margin: 1rem 0.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hourly-container {
+    width: 95%; /* fill most of parent width */
+    margin: 0 auto;
+  }
+}

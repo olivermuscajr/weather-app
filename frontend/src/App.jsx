@@ -1,10 +1,18 @@
-
-import { useState, useEffect } from 'react'
+import { useState, useEffect, CSSProperties } from 'react';
+import { ClipLoader } from "react-spinners";
 import './App.css'
 import { getWeatherData } from './api';
 import SearchBar from './components/SearchBar';
 import { parse } from 'date-fns';
 import CurrentWeather from './components/CurrentWeather';
+import HourlyForecast from './components/HourlyForecast';
+import WeeklyForecast from './components/WeeklyForecast';
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 const getGradientClass = (hour) => {
   if (hour >= 6 && hour < 9) return 'bg-sunrise';
@@ -40,7 +48,7 @@ function App() {
 
         setWeatherData({
           current: { ...data.current, mintemp_c, maxtemp_c },
-          hourly: data.forecast.forecastday[0].day,
+          hourly: data.forecast.forecastday[0].hour,
           weekly: data.forecast.forecastday.slice(1),
           location: data.location
         })
@@ -54,17 +62,27 @@ function App() {
   }, [city])
 
   return (
-    <div className={`app ${gradientClass}`}>
+    <div className={`justify-center flex align-center${gradientClass}`}>
       <div className="container">
         <SearchBar onSearch={setCity} />
-        {loading && <p>Loading...</p>}
+        {loading && <ClipLoader
+          color="#ffff"
+          loading={loading}
+          cssOverride={override}
+          size={15}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />}
         {error && <p>{error}</p>}
-        {weatherData && (
+
+        {weatherData ? (
           <>
             <CurrentWeather data={weatherData.current} location={weatherData.location} />
             <HourlyForecast data={weatherData.hourly} />
             <WeeklyForecast data={weatherData.weekly} />
           </>
+        ) : (
+          <p>Search for Location</p>
         )}
       </div>
     </div>

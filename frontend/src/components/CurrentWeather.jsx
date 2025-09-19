@@ -1,10 +1,34 @@
 import './CurrentWeather.css'
 import { format, parse } from 'date-fns';
 
+
+const getWindDescription = (value) => {
+    if (value < 10) return 'Calm';
+    if (value < 20) return 'A little breezy';
+    if (value < 30) return 'Windy';
+    return 'Very Windy'
+}
+const getHumidityDescription = (value) => {
+    if (value < 30) return 'Dry';
+    if (value < 60) return 'A little breezy';
+    if (value < 80) return 'Windy';
+    return 'Sticky'
+};
+
+const getUVDescription = (value) => {
+    if (value < 3) return 'Little';
+    if (value < 6) return 'Moderate';
+    if (value < 8) return 'High';
+    if (value < 11) return 'Very High';
+    return 'Extreme'
+}
+
 const getDayAndHHMM = (rawdate) => {
     const date = parse(rawdate, 'yyyy-MM-dd HH:mm', new Date());
     return format(date, 'EEEE, h:mm a')
 }
+
+
 
 const CurrentWeather = ({ data, location }) => {
     const { localtime, name } = location;
@@ -22,12 +46,36 @@ const CurrentWeather = ({ data, location }) => {
                     <p>{getDayAndHHMM(localtime)}</p>
                 </div>
                 <div className="condition">
-                    <img src={condition.icon} alt={condition.text}
+                    <img src={condition.icon} alt={condition.text} />
+                    <h2 className='condition-text'>{condition.text}</h2>
                 </div>
             </div>
 
             <div className="card right-card">
-
+                <div className="detail-item">
+                    <span className="detail-label">💨 Wind</span>
+                    <span className="detail-value">
+                        {wind_kph} km/h
+                        <br />
+                        <small>{getWindDescription(wind_kph)}</small>
+                    </span>
+                </div>
+                <div className="detail-item">
+                    <span className="detail-label">💧 Humidity</span>
+                    <span className="detail-value">
+                        {humidity} %
+                        <br />
+                        <small>{getHumidityDescription(humidity)}</small>
+                    </span>
+                </div>
+                <div className="detail-item">
+                    <span className="detail-label">🔆 UV Index</span>
+                    <span className="detail-value">
+                        {uv} km/h
+                        <br />
+                        <small>{getUVDescription(uv)}</small>
+                    </span>
+                </div>
             </div>
         </div>
     )
