@@ -1,7 +1,19 @@
-export const getWeatherData = async (cityName) => {
-    const response = await fetch(
-        `http://localhost:5000/api/weather?city=${cityName}`
-    )
+// src/api.js
 
-    return response.json();
-}
+const API_BASE_URL =
+    import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+export const getWeatherData = async (cityName) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/weather?city=${cityName}`);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch weather data: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching weather data:", error);
+        throw error;
+    }
+};
