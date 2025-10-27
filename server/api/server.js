@@ -33,4 +33,12 @@ app.get('/api/weather', async (req, res) => {
     }
 })
 
+// Only run app.listen() locally
+if (process.env.NODE_ENV !== "production") {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Server running locally on http://localhost:${PORT}`);
+    });
+}
+
 module.exports = app;
