@@ -7,6 +7,7 @@ import { parse } from 'date-fns';
 import CurrentWeather from './components/CurrentWeather';
 import HourlyForecast from './components/HourlyForecast';
 import WeeklyForecast from './components/WeeklyForecast';
+import Footer from './components/Footer';
 
 const override = {
   display: "block",
@@ -84,6 +85,7 @@ function App() {
         ) : (
           <p>Search for Location</p>
         )}
+        <Footer />
       </div>
     </div>
   )
